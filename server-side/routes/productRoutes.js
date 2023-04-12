@@ -4,5 +4,5 @@ const router = express.Router();
 
 router.get("/product", productController.fetchAllProducts);
 router.get("/product/:id", productController.fetchProduct);
-router.get("/sort/:id", productController.sortProduct);
+router.get("/sort/:id", productController.filterProductsByName);
 module.exports = router;

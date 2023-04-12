@@ -24,17 +24,17 @@ module.exports = {
       res.status(error.status || 500).send(error);
     }
   },
-  sortProduct: async (req, res) => {
+  filterProductsByName: async (req, res) => {
     try {
       const nameParams = toString(req.params.product_name);
       if (req.product.product_name != nameParams) {
         return res.status(400).send("tidak ada product tersebut");
       }
-      const sortProducts = await query(
+      const filterProductsByName = await query(
         `SELECT * FROM product where product_name = ${db.escape(nameParams)}`
       );
 
-      return res.status(200).send(sortProducts);
+      return res.status(200).send(filterProductsByName);
     } catch (error) {
       res.status(error.status || 500).send(error);
     }
