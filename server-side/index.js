@@ -3,11 +3,11 @@ const PORT = 8001;
 const app = express();
 const { db, query } = require("./database");
 const cors = require("cors");
-const { authRoutes } = require("./routes");
+const { authRoutes, productRoutes } = require("./routes");
 const { body, validationResult } = require("express-validator");
 // const multer = require("multer");
 // const path = require("path");
-const upload = require('./middleware/multer')
+const upload = require("./middleware/multer");
 
 app.use(cors());
 
@@ -75,6 +75,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 // })
 
 app.use("/auth", authRoutes);
+app.use("/product", productRoutes);
 
 app.listen(PORT, () => {
   console.log("Server is running on port: " + PORT);
