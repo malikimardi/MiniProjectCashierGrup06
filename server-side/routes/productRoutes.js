@@ -1,7 +1,7 @@
 const express = require("express");
 const { productController } = require("../controllers");
-const upload = require("../middleware/multer")
-const {verifyToken} = require("../middleware/auth")
+const upload = require("../middleware/multer");
+const { verifyToken } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -13,6 +13,8 @@ router.post(
 );
 router.get("/product", productController.fetchAllProducts);
 router.get("/product/:id", productController.fetchProduct);
+router.get("/asc", productController.sortAscProducts);
+router.get("/desc", productController.sortDscProducts);
 router.get("/sort/:id", productController.filterProductsByName);
 
 module.exports = router;
