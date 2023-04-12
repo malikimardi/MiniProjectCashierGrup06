@@ -21,23 +21,14 @@ module.exports = {
     )}, ${db.escape(hashPassword)})`;
     let addUserResult = await query(addUserQuery);
 
+    let payload = { id: addUserResult.insertId };
+    const token = jwt.sign(payload, "six6", { expiresIn: "4h" });
+
     return res
       .status(200)
       .send({ data: addUserResult, message: "Register success" });
   },
   login: async (req, res) => {
-    // ambil user yang email = email dari body
-
-    // cek apakah ada, kl gaada response email atau password salah
-
-    // klo ada passwordnya di cek menggunakan bcrypt
-
-    // klo salah passwordnya, response email atau password salah
-
-    // klo betul kita akan buatkan token untuk user yang login
-
-    // lalu response
-
     try {
       const { email, password } = req.body;
       const isEmailExist = await query(
@@ -57,12 +48,21 @@ module.exports = {
           .send({ message: "Email or Password is incorrect", success: false });
       }
 
+      let payload = {
+        id: isEmailExist[0].id_users,
+      };
+
+      const token = jwt.sign(payload, "six6", { expiresIn: "1h" });
+
       return res.status(200).send({
         message: "Login Success",
+        token,
         data: {
           id: isEmailExist[0].id_users,
-          email: isEmailExist[0].email,
           username: isEmailExist[0].username,
+          email: isEmailExist[0].email,
+          phone: isEmailExist[0].phone,
+          storeName: isEmailExist[0].store_name,
         },
         success: true,
       });
@@ -70,6 +70,7 @@ module.exports = {
       res.status(error.status || 500).send(error);
     }
   },
+
   fetchAllUser: async (req, res) => {
     try {
       const users = await query(`SELECT * FROM users`);
@@ -92,6 +93,7 @@ module.exports = {
       res.status(error.status || 500).send(error);
     }
   },
+
   checkLogin: async (req, res) => {
     try {
       const users = await query(
