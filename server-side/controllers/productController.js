@@ -61,7 +61,7 @@ module.exports = {
   },
   fetchAllProducts: async (req, res) => {
     try {
-      const products = await query(`SELECT * FROM product`);
+      const products = await query(`SELECT * FROM product limit 0,9`);
       return res.status(200).send(products);
     } catch (error) {
       res.status(error.status || 500).send(error);
@@ -101,6 +101,17 @@ module.exports = {
       const sortAscProducts = await query(`SELECT * FROM product order by asc`);
 
       return res.status(200).send(sortAscProducts);
+    } catch (error) {
+      res.status(error.status || 500).send(error);
+    }
+  },
+  sortDscProducts: async (req, res) => {
+    try {
+      const sortDscProducts = await query(
+        `SELECT * FROM product order by desc`
+      );
+
+      return res.status(200).send(sortDscProducts);
     } catch (error) {
       res.status(error.status || 500).send(error);
     }

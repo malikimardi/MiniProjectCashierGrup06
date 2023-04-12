@@ -9,7 +9,7 @@ function Navbar() {
   const dispatch = useDispatch();
 
   return (
-    <div className="bg-blue-300 flex justify-center h-16 gap-8">
+    <div className="bg-black text-gray-50 flex justify-items-end pl-10 h-16 gap-8">
       <button
         onClick={() => {
           navigate("/");
@@ -17,29 +17,15 @@ function Navbar() {
       >
         Home
       </button>
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Product
-      </button>
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        About
-      </button>
 
       {userGlobal.id > 0 ? (
-        <div className="bg-blue-300 flex items-center h-16 gap-8">
+        <div className="bg-black text-gray-50 flex items-center h-16 gap-8">
           <button
             onClick={() => {
-              navigate("/users");
+              navigate("/menu");
             }}
           >
-            Users
+            Menu
           </button>
           <button
             onClick={() => {
