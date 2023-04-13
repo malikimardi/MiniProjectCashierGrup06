@@ -10,9 +10,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Home from "./pages/Home";
 import UpdateProfile from "./pages/UpdateProfile";
-import Register1 from "./pages/Register1";
 import Verification from "./pages/Verification";
-import Login1 from "./pages/Login1";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,8 +33,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/user/update-profile" element={<UpdateProfile />} />
         <Route path="/user/verification/:token" element={<Verification />} />
-        <Route path="/user/register" element={<Register1 />} />
-        <Route path="/user/login" element={<Login1 />} />
+        <Route path="/user/register" element={<Register />} />
+        <Route path="/user/login" element={<Login />} />
       </Routes>
     </div>
   );
