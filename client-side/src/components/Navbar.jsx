@@ -9,14 +9,15 @@ function Navbar() {
   const dispatch = useDispatch();
 
   return (
-    <div className="bg-black text-gray-50 flex justify-items-end pl-10 h-16 gap-8">
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Home
-      </button>
+    <div className="container flex justify-around py-8 mx-auto bg-white">
+      <div class="flex items-center">
+        <h3 class="text-2xl font-medium text-blue-500">LOGO</h3>
+      </div>
+      <div class="items-center hidden space-x-8 lg:flex">
+        <button>Home</button>
+        <button>Dashboard</button>
+        <button>product</button>
+      </div>
 
       {userGlobal.id > 0 ? (
         <div className="bg-black text-gray-50 flex items-center h-16 gap-8">
@@ -37,46 +38,27 @@ function Navbar() {
           >
             Logout
           </button>
-          {userGlobal.imagePath ? (
-            <img
-              src={`http://localhost:8001/${userGlobal.imagePath}`}
-              alt=""
-              srcset=""
-              className="w-10 h-10 rounded-full "
-            />
-          ) : (
-            <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-              <svg
-                className="absolute w-12 h-12 text-gray-400 -left-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </div>
-          )}
         </div>
       ) : (
         <>
-          <button
-            onClick={() => {
-              navigate("/user/register");
-            }}
-          >
-            Register
-          </button>
-          <button
-            onClick={() => {
-              navigate("/user/login");
-            }}
-          >
-            Login
-          </button>
+          <div class="flex items-center space-x-2">
+            <button
+              class="px-4 py-2 text-blue-100 bg-blue-800 rounded-md"
+              onClick={() => {
+                navigate("/user/register");
+              }}
+            >
+              Register
+            </button>
+            <button
+              class="px-4 py-2 text-gray-200 bg-gray-400 rounded-md"
+              onClick={() => {
+                navigate("/user/login");
+              }}
+            >
+              Login
+            </button>
+          </div>
         </>
       )}
     </div>

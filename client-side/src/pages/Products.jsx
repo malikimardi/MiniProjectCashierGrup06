@@ -1,17 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsersData } from "../features/users/usersSlice";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react";
+import { Table, Thead, Tr, Th, Td, TableContainer } from "@chakra-ui/react";
 
 function Users() {
   const users = useSelector((state) => state.users.users);

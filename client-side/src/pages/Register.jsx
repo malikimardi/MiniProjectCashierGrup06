@@ -5,28 +5,35 @@ import Axios from "axios";
 
 function Register() {
   const RegisterSchema = Yup.object().shape({
-    name: Yup.string().required("Name cannot be empty"),
     username: Yup.string().required("Username cannot be empty"),
     email: Yup.string()
       .required("Email cannot be empty")
       .email("Wrong email format"),
+    phone: Yup.string().required("phone cannot be empty"),
+    store_name: Yup.string().required("store Name cannot be empty"),
     password: Yup.string()
       .required("Password cannot be empty")
       .min(3, "Password to short"),
   });
 
   const registerUser = async (value) => {
-    let response = await Axios.post("http://localhost:8001/auth/", value)
+    let response = await Axios.post("http://localhost:8001/auth/", value);
     console.log(response);
-  }
+  };
 
   return (
     <div>
       <Formik
-        initialValues={{ name: "", username: "", email: "", password: "" }}
+        initialValues={{
+          username: "",
+          email: "",
+          phone: "",
+          store_name: "",
+          password: "",
+        }}
         validationSchema={RegisterSchema}
         onSubmit={(value) => {
-          registerUser(value)
+          registerUser(value);
         }}
       >
         {(props) => {
@@ -41,25 +48,6 @@ function Register() {
                 <Form className="mt-8 space-y-6" action="#" method="POST">
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="-space-y-px rounded-md shadow-sm">
-                    <div>
-                      <label htmlFor="name" className="sr-only">
-                        Name
-                      </label>
-                      <Field
-                        id="name"
-                        name="name"
-                        type="text"
-                        autoComplete="name"
-                        required
-                        className="relative block w-full rounded-md border-0 p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Name"
-                      />
-                      <ErrorMessage
-                        component="div"
-                        name="name"
-                        style={{ color: "red", fontSize: "12px" }}
-                      />
-                    </div>
                     <div>
                       <label htmlFor="username" className="sr-only">
                         Username
@@ -99,6 +87,44 @@ function Register() {
                       />
                     </div>
                     <div>
+                      <label htmlFor="phone" className="sr-only">
+                        phone
+                      </label>
+                      <Field
+                        id="phone"
+                        name="phone"
+                        type="text"
+                        autoComplete="phone"
+                        required
+                        className="relative block w-full rounded-md border-0 p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="phone"
+                      />
+                      <ErrorMessage
+                        component="div"
+                        name="phone"
+                        style={{ color: "red", fontSize: "12px" }}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="store_name" className="sr-only">
+                        Store Name
+                      </label>
+                      <Field
+                        id="storename"
+                        name="storename"
+                        type="text"
+                        autoComplete="storename"
+                        required
+                        className="relative block w-full rounded-md border-0 p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="store name"
+                      />
+                      <ErrorMessage
+                        component="div"
+                        name="storename"
+                        style={{ color: "red", fontSize: "12px" }}
+                      />
+                    </div>
+                    <div>
                       <label htmlFor="password" className="sr-only">
                         Password
                       </label>
@@ -124,7 +150,7 @@ function Register() {
                       type="submit"
                       className="group relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Sign in
+                      register
                     </button>
                   </div>
                 </Form>

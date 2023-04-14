@@ -102,12 +102,11 @@ module.exports = {
       );
       return res.status(200).send({
         data: {
-          isAdmin: users[0].isAdmin,
-          id: users[0].id_users,
-          name: users[0].name,
-          email: users[0].email,
-          username: users[0].username,
-          imagePath: users[0].imagePath,
+          id: isEmailExist[0].id_users,
+          username: isEmailExist[0].username,
+          email: isEmailExist[0].email,
+          phone: isEmailExist[0].phone,
+          storeName: isEmailExist[0].store_name,
         },
       });
     } catch (error) {
