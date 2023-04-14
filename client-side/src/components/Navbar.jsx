@@ -14,20 +14,25 @@ function Navbar() {
         <h3 class="text-2xl font-medium text-blue-500">LOGO</h3>
       </div>
       <div class="items-center hidden space-x-8 lg:flex">
-        <button>Home</button>
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Home
+        </button>
         <button>Dashboard</button>
-        <button>product</button>
+        <button
+          onClick={() => {
+            navigate("/product");
+          }}
+        >
+          product
+        </button>
       </div>
 
       {userGlobal.id > 0 ? (
-        <div className="bg-black text-gray-50 flex items-center h-16 gap-8">
-          <button
-            onClick={() => {
-              navigate("/menu");
-            }}
-          >
-            Menu
-          </button>
+        <div className=" bg-white flex items-center h-16 gap-8">
           <button
             onClick={() => {
               localStorage.removeItem("user_token");

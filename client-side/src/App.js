@@ -1,13 +1,12 @@
 // import './App.css';
-import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
 import Login from "./pages/Login";
 import { checkLogin } from "./features/users/usersSlice";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import Home from "./pages/Home";
 import UpdateProfile from "./pages/UpdateProfile";
 import Verification from "./pages/Verification";
@@ -23,6 +22,7 @@ function App() {
       dispatch(checkLogin(userToken));
     }
     // alert(userToken)
+    // eslint-disable-next-line
   }, []);
 
   return (

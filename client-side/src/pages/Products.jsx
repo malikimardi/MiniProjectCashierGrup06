@@ -1,44 +1,74 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchUsersData } from "../features/users/usersSlice";
-import { Table, Thead, Tr, Th, Td, TableContainer } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Image,
+  Stack,
+  Heading,
+  Text,
+  Button,
+} from "@chakra-ui/react";
 
-function Users() {
-  const users = useSelector((state) => state.users.users);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchUsersData());
-  }, []);
+function Products() {
+  const [products, setProductList] = useState([]);
+  const fetchProductsData = async () => {
+    let response = await Axios.get("http://localhost:8001/product/product");
+    setProductList(response.data);
+  };
 
   const renderList = () => {
-    return users.map((user) => {
+    return products.map((product) => {
       return (
-        <Tr>
-          <Td>{user.name}</Td>
-          <Td>{user.email}</Td>
-          <Td>{user.password}</Td>
-        </Tr>
+        <div className="my-10">
+          <Card
+            direction={{ base: "column", sm: "row" }}
+            overflow="hidden"
+            variant="outline"
+          >
+            <Image
+              objectFit="cover"
+              maxW={{ base: "100%", sm: "200px" }}
+              src={product.product_img}
+              alt=""
+            />
+
+            <Stack>
+              <CardBody>
+                <Heading size="md">{product.product_name}</Heading>
+
+                <Text py="2">
+                  {product.product_price.toLocaleString("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                  })}
+                </Text>
+                <Text>{product.product_desc}</Text>
+              </CardBody>
+
+              <CardFooter className="gap-7">
+                <Button variant="solid" colorScheme="blue">
+                  Buy
+                </Button>
+              </CardFooter>
+            </Stack>
+          </Card>
+        </div>
       );
     });
   };
 
+  useEffect(() => {
+    fetchProductsData();
+  }, []);
+
   return (
-    <div className="border-2 border-solid mx-32 my-9 p-6 rounded-md">
-      <TableContainer>
-        <Table variant="striped" colorScheme="blue">
-          <Thead>
-            <Tr>
-              <Th>Name</Th>
-              <Th>Email</Th>
-              <Th>Password</Th>
-            </Tr>
-          </Thead>
-          {/* <Tbody>{renderList()}</Tbody> */}
-        </Table>
-      </TableContainer>
+    <div className="w-3/4 mx-auto my-10">
+      <p className="text-4xl font-bold">product List</p>
+      {renderList()}
     </div>
   );
 }
 
-export default Users;
+export default Products;
