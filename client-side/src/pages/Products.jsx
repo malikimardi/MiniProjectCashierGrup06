@@ -64,7 +64,7 @@ function Products() {
               <Image
                 objectFit="cover"
                 maxW={{ base: "100%", sm: "200px" }}
-                src={product.product_img}
+                src={`http://localhost:8001/${product.product_img}`}
                 alt=""
               />
 
@@ -105,9 +105,9 @@ function Products() {
         onChange={(name) => setSearch(name.target.value)}
       />
 
-      <Select placeholder="Select option">
-        <option value={sortedByName}>Sorted By Name</option>
-        <option value={sortedByPrice}>Sorted By Price</option>
+      <Select placeholder="Sort By...">
+        <option onClick={sortedByName}>Sorted By Name</option>
+        <option onClick={sortedByPrice}>Sorted By Price</option>
       </Select>
 
       <div>{renderList()}</div>
