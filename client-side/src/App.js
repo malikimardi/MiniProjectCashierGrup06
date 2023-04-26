@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import Home from "./pages/Home";
 import UpdateProfile from "./pages/UpdateProfile";
 import Verification from "./pages/Verification";
+import AddProduct from "./pages/addProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
         <Route path="/user/verification/:token" element={<Verification />} />
         <Route path="/user/register" element={<Register />} />
         <Route path="/user/login" element={<Login />} />
+        <Route path="/product/addProduct" element={<AddProduct />} />
       </Routes>
     </div>
   );
