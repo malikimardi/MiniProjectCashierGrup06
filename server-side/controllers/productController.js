@@ -12,19 +12,17 @@ module.exports = {
 
     let addProductQuery = `INSERT INTO product VALUES (null, ${db.escape(
       productName
-    )}, ${db.escape(productPrice)}, ${db.escape(
-      productDesc
-    )}, null, ${db.escape(filepath)},true,${db.escape(idusers)})`;
+    )}, ${db.escape(productPrice)}, ${db.escape(productDesc)}, ${db.escape(
+      id_category
+    )}, ${db.escape(filepath)},true,${db.escape(idusers)})`;
     let addProductResult = await query(addProductQuery);
 
-    return res
-      .status(200)
-      .send({
-        data: addProductResult,
-        message: "product created!",
-        filepath,
-        success: true,
-      });
+    return res.status(200).send({
+      data: addProductResult,
+      message: "product created!",
+      filepath,
+      success: true,
+    });
   },
   fetchAllProducts: async (req, res) => {
     try {

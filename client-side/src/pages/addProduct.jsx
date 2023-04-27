@@ -7,17 +7,19 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState("");
   const userToken = localStorage.getItem("user_token");
 
   const HandleSubmit = async (event) => {
     event.preventDefault();
+    console.log(category);
 
     const formData = new FormData();
     formData.append("productName", name);
     formData.append("productPrice", price);
     formData.append("productDesc", description);
     formData.append("file", image);
-    formData.append("id_category", categories);
+    formData.append("id_category", category);
 
     try {
       const response = await Axios.post(
@@ -128,8 +130,8 @@ const AddProduct = () => {
           className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="category"
           name="category"
-          value={categories}
-          onChange={(event) => setCategories(event.target.value)}
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
         >
           <option value="">Select Category</option>
           {categories.map((category) => (
