@@ -100,14 +100,14 @@ module.exports = {
       const users = await query(
         `SELECT * FROM users WHERE id_users = ${db.escape(req.user.id)}`
       );
+      console.log(users);
       return res.status(200).send({
         data: {
-          isAdmin: users[0].isAdmin,
           id: users[0].id_users,
-          name: users[0].name,
-          email: users[0].email,
           username: users[0].username,
-          imagePath: users[0].imagePath,
+          email: users[0].email,
+          phone: users[0].phone,
+          storeName: users[0].store_name,
         },
       });
     } catch (error) {

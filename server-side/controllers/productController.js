@@ -19,7 +19,12 @@ module.exports = {
 
     return res
       .status(200)
-      .send({ data: addProductResult, message: "product created!", filepath });
+      .send({
+        data: addProductResult,
+        message: "product created!",
+        filepath,
+        success: true,
+      });
   },
 
   fetchAllProducts: async (req, res) => {
