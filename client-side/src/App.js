@@ -18,7 +18,6 @@ function App() {
 
   useEffect(() => {
     if (userToken) {
-      alert(userToken);
       dispatch(checkLogin(userToken));
     }
     // alert(userToken)

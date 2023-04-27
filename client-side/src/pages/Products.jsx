@@ -19,32 +19,9 @@ function Products() {
     let response = await Axios.get(`http://localhost:8001/product/product/`);
     setProductList(response.data);
   };
-  const [sorted, setSorted] = useState({
-    sorted: "product_name",
-  });
-
-  const sortedByName = () => {
-    setSorted({ sorted: "product_name", reversed: !sorted.reversed });
-    const productsCopy = [...products];
-    productsCopy.sort((productA, productB) => {
-      const nameProductA = `${productA.product_name}`;
-      const nameProductB = `${productB.product_name}`;
-
-      return nameProductB.localeCompare(nameProductA);
-    });
-    setProductList(productsCopy);
-  };
-
-  const sortedByPrice = () => {
-    setSorted({ sorted: "product_price", reversed: !sorted.reversed });
-    const productsCopy = [...products];
-    productsCopy.sort((productA, productB) => {
-      return productB.product_price - productA.product_price;
-    });
-    setProductList(productsCopy);
-  };
 
   const [search, setSearch] = useState(``);
+  const [sort, setSort] = useState(`newest`);
 
   const renderList = () => {
     return products
@@ -97,6 +74,28 @@ function Products() {
     fetchProductsData();
   }, []);
 
+  useEffect(() => {
+    if (sort === "newest") {
+      setProductList((prev) =>
+        [...prev].sort((a, b) => a.id_product - b.id_product)
+      );
+    } else if (sort === "lowPrice") {
+      setProductList((prev) =>
+        [...prev].sort((a, b) => a.product_price - b.product_price)
+      );
+    } else if (sort === "highPrice") {
+      setProductList((prev) =>
+        [...prev].sort((a, b) => b.product_price - a.product_price)
+      );
+    } else if (sort === "desc") {
+      setProductList((prev) =>
+        [...prev].sort((a, b) => a.product_name - b.product_name)
+      );
+    } else {
+      setProductList((prev) => [...prev].sort());
+    }
+  }, [sort]);
+
   return (
     <div className="w-3/4 mx-auto my-10">
       <p className="text-4xl font-bold">Product List</p>
@@ -104,10 +103,12 @@ function Products() {
         placeholder="Search..."
         onChange={(name) => setSearch(name.target.value)}
       />
-
-      <Select placeholder="Sort By...">
-        <option onClick={sortedByName}>Sorted By Name</option>
-        <option onClick={sortedByPrice}>Sorted By Price</option>
+      <Select placeholder="Sorted By" onChange={(e) => setSort(e.target.value)}>
+        <option value="newest">Newest</option>
+        <option value="lowPrice">Lowest Price</option>
+        <option value="highPrice">Highest Price</option>
+        <option value="asc">A-Z</option>
+        <option value="desc">Z-A</option>
       </Select>
 
       <div>{renderList()}</div>
