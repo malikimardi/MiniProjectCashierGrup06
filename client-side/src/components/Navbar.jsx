@@ -27,7 +27,7 @@ function Navbar() {
             navigate("/product");
           }}
         >
-          product
+          Product
         </button>
       </div>
 
