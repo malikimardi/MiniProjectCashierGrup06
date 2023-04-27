@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
 const AddProduct = () => {
@@ -6,9 +6,10 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [categories, setCategories] = useState([]);
   const userToken = localStorage.getItem("user_token");
 
-  const handleSubmit = async (event) => {
+  const HandleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
@@ -16,6 +17,7 @@ const AddProduct = () => {
     formData.append("productPrice", price);
     formData.append("productDesc", description);
     formData.append("file", image);
+    formData.append("id_category", categories);
 
     try {
       const response = await Axios.post(
@@ -42,8 +44,19 @@ const AddProduct = () => {
     setImage(event.target.files[0]);
   };
 
+  useEffect(() => {
+    Axios.get("http://localhost:8001/category")
+      .then((response) => {
+        console.log(response.data);
+        setCategories(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+    <form onSubmit={HandleSubmit} className="max-w-lg mx-auto">
       <div className="mb-4">
         <label
           htmlFor="productName"
@@ -108,6 +121,23 @@ const AddProduct = () => {
           className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           onChange={handleImageChange}
         />
+      </div>
+      <div>
+        <label htmlFor="category">Category</label>
+        <select
+          className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="category"
+          name="category"
+          value={categories}
+          onChange={(event) => setCategories(event.target.value)}
+        >
+          <option value="">Select Category</option>
+          {categories.map((category) => (
+            <option key={category.id_category} value={category.id_category}>
+              {category.category_name}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="flex items-center justify-center">
         <button

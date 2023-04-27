@@ -9,8 +9,8 @@ import { checkLogin } from "./features/users/usersSlice";
 import { useDispatch } from "react-redux";
 import Home from "./pages/Home";
 import UpdateProfile from "./pages/UpdateProfile";
-import Verification from "./pages/Verification";
 import AddProduct from "./pages/addProduct";
+import AddCategory from "./pages/addCategory";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (userToken) {
-      alert(userToken);
+      // alert(userToken);
       dispatch(checkLogin(userToken));
     }
     // alert(userToken)
@@ -33,10 +33,10 @@ function App() {
         <Route path="/product" element={<Products />} />
         <Route path="/" element={<Home />} />
         <Route path="/user/update-profile" element={<UpdateProfile />} />
-        <Route path="/user/verification/:token" element={<Verification />} />
         <Route path="/user/register" element={<Register />} />
         <Route path="/user/login" element={<Login />} />
         <Route path="/product/addProduct" element={<AddProduct />} />
+        <Route path="/category/addCategory" element={<AddCategory />} />
       </Routes>
     </div>
   );
