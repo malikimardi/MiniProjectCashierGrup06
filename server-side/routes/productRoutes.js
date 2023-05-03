@@ -12,7 +12,7 @@ router.post(
   productController.addProduct
 );
 router.get("/product/", productController.fetchAllProducts);
-// router.get("/product/:id", productController.fetchProduct);
+router.get("/product/:id", productController.fetchProductsByCategory);
 // router.get("/asc", productController.sortAscProducts);
 // router.get("/desc", productController.sortDscProducts);
 // router.get("/sort/:id", productController.filterProductsByName);

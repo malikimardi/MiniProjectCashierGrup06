@@ -24,10 +24,41 @@ module.exports = {
       success: true,
     });
   },
+
+  // fetchAllProducts: async (req, res) => {
+  //   try {
+  //     const page = parseInt(req.query.page) || 0;
+  //     const limit = parseInt(req.query.limit) || 9;
+  //     const offset = limit * page;
+  //     const totalRow = await query(`SELECT count (*) FROM product `);
+
+  //     const totalPage = Math.ceil(totalRow / limit);
+
+  //     const products = await query(
+  //       `SELECT * FROM product where page = ${db.escape(page)} limit 0,9`
+  //     );
+  //     return res.status(200).send(products);
+  //   } catch (error) {
+  //     res.status(error.status || 500).send(error);
+  //   }
+  // },
   fetchAllProducts: async (req, res) => {
     try {
-      const products = await query(`SELECT * FROM product limit 0,9`);
+      const products = await query(`SELECT * FROM product `);
       return res.status(200).send(products);
+    } catch (error) {
+      res.status(error.status || 500).send(error);
+    }
+  },
+
+  fetchProductsByCategory: async (req, res) => {
+    try {
+      const idParams = parseInt(req.params.id);
+
+      const users = await query(
+        `SELECT * FROM product WHERE id_category = ${db.escape(idParams)}`
+      );
+      return res.status(200).send(users);
     } catch (error) {
       res.status(error.status || 500).send(error);
     }
