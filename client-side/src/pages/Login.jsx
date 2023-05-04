@@ -7,42 +7,42 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function Login1() {
-const dispatch = useDispatch()
-const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-const userGlobal = useSelector((state) => state.users.user);
+  const userGlobal = useSelector((state) => state.users.user);
 
-const loginSchema = Yup.object().shape({
+  const loginSchema = Yup.object().shape({
     email: Yup.string()
-    .required("Email cannot be empty")
-    .email("Wrong email format"),
+      .required("Email cannot be empty")
+      .email("Wrong email format"),
     password: Yup.string()
-    .required("Password cannot be empty")
-    .min(3, "Password too short"),
-})
+      .required("Password cannot be empty")
+      .min(3, "Password too short"),
+  });
 
-const handleLoginUser = async (value) => {
-    dispatch(loginUser1(value))
-}
+  const handleLoginUser = async (value) => {
+    dispatch(loginUser1(value));
+  };
 
-useEffect(() => {
-    if(userGlobal.id > 0){
-        navigate("/")
+  useEffect(() => {
+    if (userGlobal.id > 0) {
+      navigate("/product/userPages");
     }
-}, [userGlobal])
+  }, [userGlobal]);
 
   return (
     <div>
-        <Formik
-        initialValues={{email: "", password: ""}}
+      <Formik
+        initialValues={{ email: "", password: "" }}
         validationSchema={loginSchema}
         onSubmit={(value) => {
-            handleLoginUser(value)
+          handleLoginUser(value);
         }}
-        >
+      >
         {(props) => {
-            return (
-                <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+          return (
+            <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
               <div className="w-full max-w-md space-y-8">
                 <div>
                   <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
@@ -103,12 +103,11 @@ useEffect(() => {
                 </Form>
               </div>
             </div>
-            )
+          );
         }}
-
-        </Formik>
+      </Formik>
     </div>
-  )
+  );
 }
 
-export default Login1
+export default Login1;

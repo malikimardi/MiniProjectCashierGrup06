@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import UpdateProfile from "./pages/UpdateProfile";
 import AddProduct from "./pages/addProduct";
 import AddCategory from "./pages/addCategory";
+import EditProduct from "./pages/EditProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
         <Route path="/user/login" element={<Login />} />
         <Route path="/product/addProduct" element={<AddProduct />} />
         <Route path="/category/addCategory" element={<AddCategory />} />
+        <Route path="/product/editProduct" element={<EditProduct />} />
       </Routes>
     </div>
   );
