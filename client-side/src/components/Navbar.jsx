@@ -10,25 +10,8 @@ function Navbar() {
 
   return (
     <div className="container flex justify-around py-8 mx-auto bg-white">
-      <div class="flex items-center">
-        <h3 class="text-2xl font-medium text-blue-500">LOGO</h3>
-      </div>
-      <div class="items-center hidden space-x-8 lg:flex">
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          Home
-        </button>
-        <button>Dashboard</button>
-        <button
-          onClick={() => {
-            navigate("/product");
-          }}
-        >
-          Product
-        </button>
+      <div className="flex items-center">
+        <h3 className="text-2xl font-medium text-blue-500">Cashier 6</h3>
       </div>
 
       {userGlobal.id > 0 ? (
@@ -46,9 +29,9 @@ function Navbar() {
         </div>
       ) : (
         <>
-          <div class="flex items-center space-x-2">
+          <div className="flex items-center space-x-2">
             <button
-              class="px-4 py-2 text-blue-100 bg-blue-800 rounded-md"
+              className="px-4 py-2 text-blue-100 bg-blue-800 rounded-md"
               onClick={() => {
                 navigate("/user/register");
               }}
@@ -56,7 +39,7 @@ function Navbar() {
               Register
             </button>
             <button
-              class="px-4 py-2 text-gray-200 bg-gray-400 rounded-md"
+              className="px-4 py-2 text-gray-200 bg-gray-400 rounded-md"
               onClick={() => {
                 navigate("/user/login");
               }}

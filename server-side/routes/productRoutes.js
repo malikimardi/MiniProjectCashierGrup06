@@ -11,7 +11,8 @@ router.post(
   upload.single("file"),
   productController.addProduct
 );
-router.get("/product/", productController.fetchAllProducts);
+router.get("/product", productController.fetchAllProducts);
+router.get("/product/:id", productController.fetchProductsByCategory);
 // router.get("/product/:id", productController.fetchProduct);
 // router.get("/asc", productController.sortAscProducts);
 // router.get("/desc", productController.sortDscProducts);

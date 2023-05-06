@@ -1,5 +1,4 @@
 const { db, query } = require("../database");
-const bcrypt = require("bcrypt");
 
 module.exports = {
   addProduct: async (req, res) => {
@@ -32,7 +31,18 @@ module.exports = {
       res.status(error.status || 500).send(error);
     }
   },
+  fetchProductsByCategory: async (req, res) => {
+    try {
+      const idParams = parseInt(req.params.id);
 
+      const users = await query(
+        `SELECT * FROM product WHERE id_category = ${db.escape(idParams)}`
+      );
+      return res.status(200).send(users);
+    } catch (error) {
+      res.status(error.status || 500).send(error);
+    }
+  },
   // fetchAllProducts: async (req, res) => {
   //   try {
   //     const products = await query(`SELECT * FROM product`);
@@ -104,5 +114,4 @@ module.exports = {
   //   } catch (error) {
   //     res.status(error.status || 500).send(error);
   //   }
-  // },
 };
