@@ -30,12 +30,12 @@ function Cart() {
 
   return (
     <div className="flex flex-col h-10 mx-auto max-w-2xl">
-      <p className="text-lg font-bold text-gray-600">Shopping Cart</p>
+      <p className="text-lg pt-20 font-bold text-gray-600">Shopping Cart</p>
 
       {cartItems.length === 0 ? (
         <p className="text-lg text-gray-600">Your cart is empty.</p>
       ) : (
-        <ul className="divide-y divide-gray-200">
+        <ul className="divide-y divide-red-200">
           {cartItems.map((item) => (
             <li key={item.id_product} className="py-4 flex">
               <div className="ml-6 flex-1 flex flex-col justify-between">
@@ -69,13 +69,18 @@ function Cart() {
                       </p>
                     </div>
                     <div className="ml-4 flex items-center">
-                      <button
-                        type="button"
-                        className="inline-flex items-center justify-center w-8 h-8 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                        onClick={() => handleDecreaseQuantity(item.id_product)}
-                      >
-                        -
-                      </button>
+                      {item.quantity > 1 && (
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center w-8 h-8 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+                          onClick={() =>
+                            handleDecreaseQuantity(item.id_product)
+                          }
+                        >
+                          -
+                        </button>
+                      )}
+
                       <div className="mx-2">{item.quantity}</div>
 
                       <button
@@ -104,7 +109,7 @@ function Cart() {
           <div class="mt-6 text-center">
             <button
               type="button"
-              class="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
+              class="group inline-flex w-full items-center justify-center rounded-md bg-red-400 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
             >
               Checkout
               <svg

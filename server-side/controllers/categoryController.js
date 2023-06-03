@@ -18,7 +18,7 @@ module.exports = {
   },
   fetchAllCategories: async (req, res) => {
     try {
-      const category = await query(`SELECT * FROM category limit 0,9`);
+      const category = await query(`SELECT * FROM category limit 0,6`);
       return res.status(200).send(category);
     } catch (error) {
       res.status(error.status || 500).send(error);

@@ -25,7 +25,7 @@ module.exports = {
   },
   fetchAllProducts: async (req, res) => {
     try {
-      const products = await query(`SELECT * FROM product limit 0,9`);
+      const products = await query(`SELECT * FROM product`);
       return res.status(200).send(products);
     } catch (error) {
       res.status(error.status || 500).send(error);

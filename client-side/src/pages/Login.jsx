@@ -29,6 +29,7 @@ function Login1() {
     if (userGlobal.id > 0) {
       navigate("/product");
     }
+    // eslint-disable-next-line
   }, [userGlobal]);
 
   return (

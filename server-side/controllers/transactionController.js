@@ -5,13 +5,12 @@ module.exports = {
     const { id_product, product_quantity, productPrice } = req.body;
 
     idUsers = req.id.user;
-    totalPrice = product_quantity * productPrice;
 
     let addTransactionQuery = `INSERT INTO transaction_product VALUES (null, ${db.escape(
       id_product
-    )}, ${db.escape(product_quantity)}, ${db.escape(productPrice)},${db.escape(
-      totalPrice
-    )}, ${db.escape(idUsers)})`;
+    )}, ${db.escape(product_quantity)}, ${db.escape(productPrice)}, ${db.escape(
+      idUsers
+    )})`;
 
     let addTransactionResult = await query(addTransactionQuery);
 
@@ -24,7 +23,7 @@ module.exports = {
   fetchAllTransaction: async (req, res) => {
     try {
       const transactionProducts = await query(
-        `SELECT * FROM transaction_product limit 0,9`
+        `SELECT * FROM transaction_product`
       );
       return res.status(200).send(transactionProducts);
     } catch (error) {
